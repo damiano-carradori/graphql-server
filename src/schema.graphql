@@ -1,0 +1,15 @@
+type Query {
+  tasks: [Task!]!
+}
+
+type Mutation {
+  addTask(text: String!): Task!
+  deleteTask(id: ID!): Boolean!
+  updateTask(id: ID!, text: String, done: Boolean): Boolean!
+}
+
+type Task {
+  _id: ID!
+  text: String!
+  done: Boolean!
+}

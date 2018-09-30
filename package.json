@@ -1,0 +1,13 @@
+{
+  "name": "graph-ql",
+  "version": "1.0.0",
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "mongoose": "^5.3.0",
+    "graphql-yoga": "^1.16.2",
+    "nodemon": "^1.18.4"
+  },
+  "scripts": {
+    "start": "nodemon --watch src --ext js,graphql ./src/index.js"
+  }
+}
