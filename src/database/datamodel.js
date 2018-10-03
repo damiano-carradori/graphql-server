@@ -5,7 +5,7 @@ const options = {
     'pass': process.env.DB_PASS
 };
 
-mongoose.connect(process.env.DB_URI, options);
+mongoose.connect(process.env.DB_URI, options).catch((err)=>console.log(err));
 
 let taskSchema = new mongoose.Schema({
     text: String,
