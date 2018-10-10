@@ -1,4 +1,4 @@
 # graphql-server
-[Click here to try the playground](https://graph-ql-sxqvqzfyvf.now.sh)
+[Click here to try the playground]()
 
-GraphQL Server built with graphql-yoga and MongoDB
+Another GraphQL server with Apollo and MongoDB

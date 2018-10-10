@@ -1,13 +1,17 @@
 {
-  "name": "graph-ql",
+  "name": "graphql-server",
   "version": "1.0.0",
+  "description": "Another GraphQL server with Apollo and MongoDB",
   "dependencies": {
-    "dotenv": "^6.0.0",
-    "mongoose": "^5.3.0",
-    "graphql-yoga": "^1.16.2",
-    "nodemon": "^1.18.4"
+    "graphql": "^14.0.2",
+    "apollo-server": "^2.1.0",
+    "mongoose": "^5.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4",
+    "dotenv": "^6.1.0"
   },
   "scripts": {
-    "start": "nodemon --watch src --ext js,graphql ./src/index.js"
+    "start": "nodemon --watch src ./index.js"
   }
 }
