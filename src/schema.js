@@ -23,9 +23,13 @@ const typeDefs = gql`
     }
     
     type Mutation {
+        # User
         addUser(username: String!, profile_picture: String): User!
         deleteUser(id: ID!): User!
+        # Task
         addTask(user: ID!, text: String!): Task!
+        deleteTask(id: ID!): Task!
+        updateTask(id: ID!, text: String, done: Boolean): Task!
     }
 `;
 
