@@ -44,6 +44,20 @@ const resolvers = {
                 }
             }, {new: true});
         },
+        async moveTask(root, {user, from, to}) {
+            let toMove = await Tasks.findOne({position: from, user});
+            if (from > to) {
+                await Tasks.updateMany({position: {$gte: to, $lt: from}, user}, {$inc: {position: 1}});
+            } else {
+                await Tasks.updateMany({position: {$gt: from, $lte: to}, user}, {$inc: {position: -1}});
+            }
+            return await Tasks.findByIdAndUpdate(toMove.id, {
+                $set: {
+                    updated_at: Date.now(),
+                    position: to
+                }
+            }, {new: true});
+        }
     }
 };
 

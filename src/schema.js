@@ -30,6 +30,7 @@ const typeDefs = gql`
         addTask(user: ID!, text: String!): Task!
         deleteTask(id: ID!): Task!
         updateTask(id: ID!, text: String, done: Boolean): Task!
+        moveTask(user: String!, from: Int!, to: Int!): Task!
     }
 `;
 
