@@ -26,24 +26,23 @@ const resolvers = {
         },
         // Task
         async addTask(root, {user, text}) {
-            await Tasks.updateMany({user},{$inc:{position:1}});
+            await Tasks.updateMany({user}, {$inc: {position: 1}});
             let task = new Tasks({user, text});
             return await task.save();
         },
         async deleteTask(root, {id}) {
             let removed = await Tasks.findByIdAndRemove(id);
-            await Tasks.updateMany({user: removed.user, position: { $gt: removed.position } },{$inc:{position:-1}});
+            await Tasks.updateMany({user: removed.user, position: {$gt: removed.position}}, {$inc: {position: -1}});
             return removed;
         },
-        async updateTask(root, {id, text, done, position}) {
-            return await Tasks.findByIdAndUpdate(id,{
+        async updateTask(root, {id, text, done}) {
+            return await Tasks.findByIdAndUpdate(id, {
                 $set: {
                     updated_at: Date.now(),
-                    ...(text!==undefined && {text}),
-                    ...(done!==undefined && {done}),
-                    ...(position!==undefined && {position}),
+                    ...(text !== undefined && {text}),
+                    ...(done !== undefined && {done})
                 }
-            },{new:true});
+            }, {new: true});
         },
     }
 };
