@@ -6,7 +6,8 @@ const { Users, Tasks } = require('./datamodels');
 // A map of functions which return data for the schema.
 const resolvers = {
     Query: {
-        async user(root, {id}) {
+        async me(root, args, context) {
+            const id = getUserId(context);
             return await Users.findById(id)
         },
         async users() {
