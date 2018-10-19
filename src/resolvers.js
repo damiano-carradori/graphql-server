@@ -1,3 +1,6 @@
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const { APP_SECRET, getUserId } = require('./utils');
 const { Users, Tasks } = require('./datamodels');
 
 // A map of functions which return data for the schema.
@@ -17,6 +20,41 @@ const resolvers = {
     },
     Mutation: {
         // User
+        async signUp(parent, {username, password, profile_picture}, context, info) {
+            const cryptPassword = await bcrypt.hash(password, 10);
+
+            let userModel = new Users({
+                username,
+                password: cryptPassword,
+                profile_picture,
+            });
+            let user = await userModel.save();
+
+            const token = jwt.sign({userId: user.id}, APP_SECRET);
+
+            return {
+                token,
+                user,
+            }
+        },
+        async logIn(parent, {username, password}, context, info) {
+            const user = await Users.findOne({username});
+            if (!user) {
+                throw new Error('No such user found')
+            }
+
+            const valid = await bcrypt.compare(password, user.password);
+            if (!valid) {
+                throw new Error('Invalid password')
+            }
+
+            const token = jwt.sign({userId: user.id}, APP_SECRET);
+
+            return {
+                token,
+                user,
+            }
+        },
         async addUser(root, {username, profile_picture}) {
             let user = new Users({username, profile_picture});
             return await user.save()
