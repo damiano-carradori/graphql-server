@@ -60,7 +60,8 @@ const resolvers = {
             return await Users.findByIdAndRemove(id)
         },
         // Task
-        async addTask(root, {user, text}) {
+        async addTask(root, {text}, context) {
+            const user = getUserId(context);
             await Tasks.updateMany({user}, {$inc: {position: 1}});
             let task = new Tasks({user, text});
             return await task.save();
