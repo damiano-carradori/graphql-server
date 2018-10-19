@@ -10,6 +10,11 @@ const typeDefs = gql`
         done: Boolean!
     }
 
+    type AuthPayload {
+        token: String
+        user: User
+    }
+    
     type User {
         id: ID!
         username: String!
@@ -25,6 +30,8 @@ const typeDefs = gql`
     
     type Mutation {
         # User
+        signUp(email: String!, password: String!, name: String!): AuthPayload
+        logIn(username: String!, password: String!): AuthPayload
         addUser(username: String!, profile_picture: String): User!
         deleteUser(id: ID!): User!
         # Task
