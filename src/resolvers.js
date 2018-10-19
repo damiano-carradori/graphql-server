@@ -56,10 +56,6 @@ const resolvers = {
                 user,
             }
         },
-        async addUser(root, {username, profile_picture}) {
-            let user = new Users({username, profile_picture});
-            return await user.save()
-        },
         async deleteUser(root, {id}) {
             return await Users.findByIdAndRemove(id)
         },
