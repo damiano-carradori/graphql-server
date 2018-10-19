@@ -66,9 +66,10 @@ const resolvers = {
             let task = new Tasks({user, text});
             return await task.save();
         },
-        async deleteTask(root, {id}) {
-            let removed = await Tasks.findByIdAndRemove(id);
-            await Tasks.updateMany({user: removed.user, position: {$gt: removed.position}}, {$inc: {position: -1}});
+        async deleteTask(root, {id}, context) {
+            const user = getUserId(context);
+            let removed = await Tasks.findOneAndDelete({_id: id, user});
+            await Tasks.updateMany({user: user, position: {$gt: removed.position}}, {$inc: {position: -1}});
             return removed;
         },
         async updateTask(root, {id, text, done}) {
