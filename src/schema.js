@@ -18,7 +18,6 @@ const typeDefs = gql`
     type User {
         id: ID!
         username: String!
-        password: String!
         profile_picture: String
         tasks: [Task!]!
     }
@@ -32,7 +31,6 @@ const typeDefs = gql`
         # User
         signUp(username: String!, password: String!, profile_picture: String!): AuthPayload
         logIn(username: String!, password: String!): AuthPayload
-        addUser(username: String!, profile_picture: String): User!
         deleteUser(id: ID!): User!
         # Task
         addTask(user: ID!, text: String!): Task!
