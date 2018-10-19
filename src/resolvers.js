@@ -72,8 +72,9 @@ const resolvers = {
             await Tasks.updateMany({user: user, position: {$gt: removed.position}}, {$inc: {position: -1}});
             return removed;
         },
-        async updateTask(root, {id, text, done}) {
-            return await Tasks.findByIdAndUpdate(id, {
+        async updateTask(root, {id, text, done}, context) {
+            const user = getUserId(context);
+            return await Tasks.findOneAndUpdate({_id: id, user}, {
                 $set: {
                     updated_at: Date.now(),
                     ...(text !== undefined && {text}),
