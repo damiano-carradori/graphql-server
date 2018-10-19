@@ -12,7 +12,8 @@ mongoose.connect(process.env.DB_URI, options).catch((err)=>console.log(err));
 
 const server = new ApolloServer({
     typeDefs,
-    resolvers
+    resolvers,
+    context: req => ({...req})
 });
 
 server.listen(80).then(({ url }) => {
