@@ -13,6 +13,7 @@ const typeDefs = gql`
     type User {
         id: ID!
         username: String!
+        password: String!
         profile_picture: String
         tasks: [Task!]!
     }
