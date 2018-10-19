@@ -26,6 +26,7 @@ const Tasks = mongoose.model('tasks', taskSchema);
 // User
 const userSchema = new Schema({
     username: String,
+    password: String,
     profile_picture: String
 });
 const Users = mongoose.model('users', userSchema);
