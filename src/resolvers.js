@@ -20,7 +20,7 @@ const resolvers = {
     },
     Mutation: {
         // User
-        async signUp(parent, {username, password, profile_picture}, context, info) {
+        async signUp(parent, {username, password, profile_picture}) {
             const cryptPassword = await bcrypt.hash(password, 10);
 
             let userModel = new Users({
@@ -37,7 +37,7 @@ const resolvers = {
                 user,
             }
         },
-        async logIn(parent, {username, password}, context, info) {
+        async logIn(parent, {username, password}) {
             const user = await Users.findOne({username});
             if (!user) {
                 throw new Error('No such user found')
