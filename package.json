@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Another GraphQL server with Apollo and MongoDB",
   "dependencies": {
-    "apollo-server": "^2.1.0",
+    "apollo-server": "^2.14.2",
     "bcryptjs": "^2.4.3",
     "graphql": "^14.0.2",
     "jsonwebtoken": "^8.3.0",
